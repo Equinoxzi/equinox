@@ -1,0 +1,101 @@
+final int gSize = 25;
+float snakeSize = 800/gSize;
+float x, y;
+float dirX, dirY;
+int snakeLength;
+int snakesL = 0;
+boolean spawned;
+float foodX, foodY;
+
+
+void setup() {
+  size(800, 800);
+  background(WHITE);
+  x = 0;
+  y = 0;
+  dirX = 2;
+  dirY = 0;
+  snakeLength = 3;
+  spawned = false;
+  foodX = 0;
+  foodY = 0;
+}
+
+
+void draw() {
+  background(WHITE);
+  grid();
+  food();
+  snake();
+  gameOver();
+}
+
+
+void grid() {
+  int increment = width/gSize;
+  while (increment < width) {
+    line(increment, 0, increment, height);
+    line(0, increment, width, increment);
+    increment += width/gSize;
+  }
+}
+
+
+
+void gameOver() {
+  if (x < 0 || x > width || y > height || y < 0) {
+    textSize(50);
+    textAlign(CENTER);
+    fill(BLACK);
+    rect(0, 0, width, height);
+    fill(RED);
+    text("End Game", width/2, height/2);
+  }
+}
+
+void food() {
+  if (!spawned) {
+    foodX = (int) random(0, gSize - 1) * snakeSize;
+    foodY = (int) random(0, gSize - 1) * snakeSize;
+    spawned = true;
+  }
+  fill(RED);
+  ellipseMode(CORNER);
+  ellipse(foodX, foodY, snakeSize, snakeSize);
+  println(foodX + " + " + foodY + "\n" + x + " + " + y);
+  if (foodX == x && foodY == y) {
+    spawned = false;
+  }
+}
+
+void movement() {
+  if (keyPressed) {
+    if (key == 'w' && dirY == 0) {
+      dirX = 0;
+      dirY = -2;
+    }
+    if (key == 's' && dirY == 0) {
+      dirX = 0;
+      dirY = 2;
+    }
+    if (key == 'a' && dirX == 0) {
+      dirX = -2;
+      dirY = 0;
+    }
+    if (key == 'd' && dirX == 0) {
+      dirX = 2;
+      dirY = 0;
+    }
+  }
+}
+
+void snake() {
+  fill(GREEN);
+  ellipseMode(CORNER);
+  ellipse(x, y, snakeSize, snakeSize);
+  if (x % (width/gSize) == 0 && y % (height/gSize)  == 0) {
+    movement();
+  }
+  x += dirX;
+  y += dirY;
+}
