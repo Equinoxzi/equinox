@@ -8,19 +8,25 @@ int snakesL = 0;
 boolean spawned;
 float foodX, foodY;
 float speed;
+int run, eaten;
+boolean flagR, lost;
 
 void setup() {
   size(800, 800);
   background(WHITE);
-  x = 0;
-  y = 0;
+  x = (gSize/2) * snakeSize;
+  y = (gSize/2) * snakeSize;
   speed = 2;
-  dirX = speed;
+  dirX = 0;
   dirY = 0;
   snakeLength = 3;
   spawned = false;
   foodX = 0;
   foodY = 0;
+  run = 1;
+  eaten = -1;
+  flagR = false;
+  lost = false;
   frameRate(90);
 } // setup()
 
@@ -32,6 +38,7 @@ void draw() {
   food();
   snake();
   gameOver();
+  restart();
 } // draw()
 
 
@@ -67,14 +74,45 @@ void gameOver() {
     fill(BLACK);
     rect(0, 0, width, height);
     fill(RED);
-    text("Game Over", width/2, height/2);
+    text("Game Over\nPress r to Restart", width/2, height/2);
+    x = 9999999;
+    y = 9999999;
+    lost = true;
   }
 } // gameOver()
 
+void restart()  {
+  fill(BLACK);
+  textSize(30);
+  text("Run Count: " + run, 50, 50);
+  if(key == 'r' && lost)  {
+    fill(BLACK);
+    textSize(30);
+    textAlign(LEFT);
+    x = (gSize/2) * snakeSize;
+    y = (gSize/2) * snakeSize;
+    dirX = 0;
+    dirY = 0;
+    snakeLength = 3;
+    if(flagR)  {
+      run++;
+      flagR = false;
+      lost = false;
+    }
+  }
+}
+
+void keyReleased()  {
+  if(key == 'r') flagR = true; 
+}
+
 void food() {
+  fill(BLACK);
+  text("Food Eaten: " + eaten, 50, 600);
   if (!spawned) {
     foodX = (int) random(0, gSize - 1) * snakeSize;
     foodY = (int) random(0, gSize - 1) * snakeSize;
+    eaten++;
     spawned = true;
   }
   fill(RED);
