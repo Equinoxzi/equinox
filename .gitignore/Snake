@@ -1,3 +1,12 @@
+/* 
+This is my attempt at making a snake game! 
+By Alexandreus Redford
+Updates required: Adding a tail, tail size increases as the snake eats more
+Problems: Tail follows body direction at the same time
+This was made on the Processing 3.4 IDE in Java
+Enjoy!
+*/
+
 // Snake
 final int gSize = 25;
 float snakeSize = 800/gSize;
