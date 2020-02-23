@@ -74,7 +74,7 @@ void gameOver() {
     fill(BLACK);
     rect(0, 0, width, height);
     fill(RED);
-    text("Game Over\nPress r to Restart", width/2, height/2);
+    text("Game Over\nPress r to Restart\nYour Score was " + eaten, width/2, height/2);
     x = 9999999;
     y = 9999999;
     lost = true;
@@ -103,7 +103,10 @@ void restart()  {
 }
 
 void keyReleased()  {
-  if(key == 'r') flagR = true; 
+  if(key == 'r') {
+    flagR = true; 
+    eaten = 0;
+  }
 }
 
 void food() {
