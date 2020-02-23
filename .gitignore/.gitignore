@@ -1,3 +1,4 @@
+// Snake
 final int gSize = 25;
 float snakeSize = 800/gSize;
 float x, y;
@@ -99,3 +100,15 @@ void snake() {
   x += dirX;
   y += dirY;
 }
+
+
+// Colors
+final color BLACK = color(0);
+final color GREY = color(128);
+final color WHITE = color(255);
+final color RED = color(255, 0, 0);
+final color PURPLE = color(128, 0, 128);
+final color ORANGE = color(255, 128, 0);
+final color YELLOW = color(255, 255, 0);
+final color GREEN = color(0, 128, 0);
+final color BLUE = color(0, 0, 255);
