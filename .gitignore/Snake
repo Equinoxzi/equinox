@@ -26,6 +26,7 @@ void setup() {
 void draw() {
   background(WHITE);
   grid();
+  stroke(BLACK);
   food();
   snake();
   gameOver();
@@ -33,14 +34,28 @@ void draw() {
 
 
 void grid() {
-  int increment = width/gSize;
-  while (increment < width) {
-    line(increment, 0, increment, height);
-    line(0, increment, width, increment);
-    increment += width/gSize;
+  noStroke();
+  fill(GREEN);
+  int incrementX = 0;
+  int incrementY = 0;
+  int i = 0;
+  while (incrementY < height) {
+    while (incrementX < width) {
+//    line(increment, 0, increment, height);
+//    line(0, increment, width, increment);
+      rect(incrementX, incrementY, snakeSize, snakeSize);
+      incrementX += width/gSize;
+      i++;
+      if(i % 2 == 0)  {
+        fill(GREEN);
+      } else {
+        fill(0, 64, 0);
+      }
+    }
+    incrementY += width/gSize;
+    incrementX = 0;
   }
 }
-
 
 
 void gameOver() {
@@ -91,7 +106,7 @@ void movement() {
 }
 
 void snake() {
-  fill(GREEN);
+  fill(BLUE);
   ellipseMode(CORNER);
   ellipse(x, y, snakeSize, snakeSize);
   if (x % (width/gSize) == 0 && y % (height/gSize)  == 0) {
