@@ -7,20 +7,22 @@ int snakeLength;
 int snakesL = 0;
 boolean spawned;
 float foodX, foodY;
-
+float speed;
 
 void setup() {
   size(800, 800);
   background(WHITE);
   x = 0;
   y = 0;
-  dirX = 2;
+  speed = 2;
+  dirX = speed;
   dirY = 0;
   snakeLength = 3;
   spawned = false;
   foodX = 0;
   foodY = 0;
-}
+  frameRate(90);
+} // setup()
 
 
 void draw() {
@@ -30,7 +32,7 @@ void draw() {
   food();
   snake();
   gameOver();
-}
+} // draw()
 
 
 void grid() {
@@ -49,13 +51,13 @@ void grid() {
       if(i % 2 == 0)  {
         fill(GREEN);
       } else {
-        fill(0, 64, 0);
+        fill(0, 180, 0);
       }
     }
     incrementY += width/gSize;
     incrementX = 0;
   }
-}
+} // grid()
 
 
 void gameOver() {
@@ -65,9 +67,9 @@ void gameOver() {
     fill(BLACK);
     rect(0, 0, width, height);
     fill(RED);
-    text("End Game", width/2, height/2);
+    text("Game Over", width/2, height/2);
   }
-}
+} // gameOver()
 
 void food() {
   if (!spawned) {
@@ -82,28 +84,29 @@ void food() {
   if (foodX == x && foodY == y) {
     spawned = false;
   }
-}
+} // food()
+
 
 void movement() {
   if (keyPressed) {
     if (key == 'w' && dirY == 0) {
       dirX = 0;
-      dirY = -2;
+      dirY = -speed;
     }
     if (key == 's' && dirY == 0) {
       dirX = 0;
-      dirY = 2;
+      dirY = speed;
     }
     if (key == 'a' && dirX == 0) {
-      dirX = -2;
+      dirX = -speed;
       dirY = 0;
     }
     if (key == 'd' && dirX == 0) {
-      dirX = 2;
+      dirX = speed;
       dirY = 0;
     }
   }
-}
+} // movement()
 
 void snake() {
   fill(BLUE);
@@ -114,7 +117,9 @@ void snake() {
   }
   x += dirX;
   y += dirY;
-}
+} // snake()
+
+
 
 
 // Colors
