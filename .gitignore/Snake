@@ -111,7 +111,7 @@ void keyReleased()  {
 
 void food() {
   fill(BLACK);
-  text("Food Eaten: " + eaten, 50, 600);
+  text("Food Eaten: " + eaten, 50, 90);
   if (!spawned) {
     foodX = (int) random(0, gSize - 1) * snakeSize;
     foodY = (int) random(0, gSize - 1) * snakeSize;
@@ -159,8 +159,6 @@ void snake() {
   x += dirX;
   y += dirY;
 } // snake()
-
-
 
 
 // Colors
