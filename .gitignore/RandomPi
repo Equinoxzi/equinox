@@ -1,0 +1,74 @@
+// ApproxPi
+float r;
+float in, total;
+boolean wasP;
+
+void setup() {
+  size(500, 500);
+  r = 200;
+  //translate(width/2, height/2);
+  //background(BLACK);
+  //stroke(WHITE);
+  //noFill();
+  //strokeWeight(3);
+  //rectMode(CENTER);
+  //ellipse(0, 0, r * 2, r * 2);
+  //rect(0, 0, r * 2, r * 2);
+  in = 0;
+  total = 0;
+  frameRate(99999);
+}
+
+void draw() {
+  translate(width/2, height/2);
+  background(BLACK);
+  stroke(WHITE);
+  noFill();
+  strokeWeight(3);
+  rectMode(CENTER);
+  ellipse(0, 0, r * 2, r * 2);
+  rect(0, 0, r * 2, r * 2);
+  float x = random(-r, r);
+  float y = random(-r, r);
+  float d = sqrt((x * x) + (y * y));
+  strokeWeight(1);
+  if (d < r) {
+    stroke(GREEN);
+    in++;
+    total++;
+  } else {
+    stroke(RED);
+    total++;
+  }
+  point(x, y);
+  value();
+//  runTime();
+}
+
+void runTime() {
+  fill(WHITE);
+  textSize(14);
+  textAlign(LEFT);
+  text(String.format("Frames Elapsed: %10d  FPS: %4f", frameCount, frameRate), -r, -r - 20);
+}
+
+void value() {
+  fill(BLUE);
+  
+  textSize(50);
+  textAlign(CENTER);
+  text("PI: " + (4 * (in/total)), 0, 0);
+}
+
+
+
+// Colors
+final color BLACK = color(0);
+final color GREY = color(128);
+final color WHITE = color(255);
+final color RED = color(255, 0, 0);
+final color PURPLE = color(128, 0, 128);
+final color ORANGE = color(255, 128, 0);
+final color YELLOW = color(255, 255, 0);
+final color GREEN = color(0, 255, 0);
+final color BLUE = color(0, 0, 255);
