@@ -25,7 +25,7 @@ void setup() {
   background(WHITE);
   x = (gSize/2) * snakeSize;
   y = (gSize/2) * snakeSize;
-  speed = 2;
+  speed = snakeSize;
   dirX = 0;
   dirY = 0;
   snakeLength = 3;
@@ -36,7 +36,7 @@ void setup() {
   eaten = -1;
   flagR = false;
   lost = false;
-  frameRate(90);
+  frameRate(6);
 } // setup()
 
 
@@ -129,9 +129,10 @@ void food() {
   }
   fill(RED);
   ellipseMode(CORNER);
-  ellipse(foodX, foodY, snakeSize, snakeSize);
+  rect(foodX, foodY, snakeSize, snakeSize);
   println(foodX + " + " + foodY + "\n" + x + " + " + y);
-  if (foodX == x && foodY == y) {
+  if (foodX < x + snakeSize/2 && foodX > x - snakeSize/2 
+  && foodY < y + snakeSize/2 && foodY > y - snakeSize/2) {
     spawned = false;
   }
 } // food()
@@ -161,13 +162,14 @@ void movement() {
 void snake() {
   fill(BLUE);
   ellipseMode(CORNER);
-  ellipse(x, y, snakeSize, snakeSize);
+  rect(x, y, snakeSize, snakeSize);
   if (x % (width/gSize) == 0 && y % (height/gSize)  == 0) {
     movement();
   }
   x += dirX;
   y += dirY;
 } // snake()
+
 
 
 // Colors
